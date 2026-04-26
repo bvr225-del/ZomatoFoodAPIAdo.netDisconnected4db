@@ -32,6 +32,13 @@ namespace ZomatoFoodAPI_BusinessEntities.Utils
         public static string GetEmployeeByEmpid = "Usp_GetEmployeeId";
         #endregion
 
+        #region FilesUpload storedprocedures
+        public static string AddFileUpload_SP = "Usp_AddFileUpload";
+        public static string GetFileUpload_SP = "GetFileUpload";
+        public static string GetFileUploadDetailsById_SP = "GetFileUploadDetailsById";
+        #endregion
+
+
         #region restaurant storedprocedures
         public static string AddRestaurant = "Usp_AddRestaurant";
         public static string UpdateRestaurant = "Usp_UpdateRestaurant";

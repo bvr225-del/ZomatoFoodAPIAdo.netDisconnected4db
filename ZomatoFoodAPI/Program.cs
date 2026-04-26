@@ -24,6 +24,9 @@ builder.Services.AddScoped<IOrdersService, OrdersService>();//register the servi
 //================================================================================================
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();//register the repository interface and its implementation in the dependency injection container of the application using the AddScoped method   builder object.
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();//register the service interface and its implementation in the dependency injection container of the application using the AddScoped method   builder object.
+//================================================================================================
+builder.Services.AddScoped<IFilesUploadService, FilesUploadService>();
+builder.Services.AddScoped<IFilesUploadRepository, FilesUploadRepository>();
 
 var app = builder.Build();
 
