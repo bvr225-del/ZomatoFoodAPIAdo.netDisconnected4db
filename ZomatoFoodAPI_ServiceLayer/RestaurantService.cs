@@ -16,13 +16,13 @@ namespace ZomatoFoodAPI_ServiceLayer
         {
             _restaurantRepository = restaurantRepository;
         }
-        public async Task<bool> AddRestaurant(Restaurant Objres)
+        public async Task<bool> AddRestaurant(RestaurantDto Objres)
         {
             Restaurant objres = new Restaurant();
             objres.RestaurantName = Objres.RestaurantName;
             objres.RestaurantLocation = Objres.RestaurantLocation;
             var res = await _restaurantRepository.AddRestaurant(objres);
-            return res;
+            return true;
 
         }
 
@@ -33,7 +33,7 @@ namespace ZomatoFoodAPI_ServiceLayer
             return true;
         }
 
-        public async Task<List<Restaurant>> GetallRestaurants()
+        public async Task<List<RestaurantDto>> GetallRestaurants()
         {
             List<RestaurantDto> reslist = new List<RestaurantDto>();
             var getrestaurants = await _restaurantRepository.GetallRestaurants();
@@ -48,11 +48,11 @@ namespace ZomatoFoodAPI_ServiceLayer
 
 
             }
-            return getrestaurants;
+            return reslist;
 
         }
 
-        public async Task<Restaurant> GetRestaurantById(int Id)
+        public async Task<RestaurantDto> GetRestaurantById(int Id)
         {
             var res = await _restaurantRepository.GetRestaurantById(Id);
             RestaurantDto objres = new RestaurantDto();
@@ -60,11 +60,11 @@ namespace ZomatoFoodAPI_ServiceLayer
             objres.RestaurantName = res.RestaurantName;
             objres.RestaurantLocation = res.RestaurantLocation;
             objres.CreationDate = res.CreationDate;
-            return res;
+            return objres;
 
         }
 
-        public async Task<bool> UpdateRestaurant(Restaurant Objres)
+        public async Task<bool> UpdateRestaurant(RestaurantDto Objres)
         {
             Restaurant res = new Restaurant();
             res.Id = Objres.Id;
@@ -74,5 +74,6 @@ namespace ZomatoFoodAPI_ServiceLayer
             return true;
 
         }
+
     }
 }
