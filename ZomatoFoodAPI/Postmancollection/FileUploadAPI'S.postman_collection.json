@@ -1,0 +1,147 @@
+{
+  "info": {
+    "_postman_id": "d151e62c-8ea6-429b-a588-54b3738570f4",
+    "name": "FileUploadAPI'S",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53440198",
+    "_collection_link": "https://go.postman.co/collection/53440198-d151e62c-8ea6-429b-a588-54b3738570f4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "FileUpload",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "File",
+              "type": "file",
+              "uuid": "adbff0b1-3ec8-425e-874e-5c3d2d892a0d",
+              "src": [
+                "/C:/Users/dell/Downloads/image (2).png",
+                "/C:/Users/dell/Downloads/image (2).png"
+              ]
+            },
+            {
+              "key": "Imagecaption",
+              "value": "itsImage",
+              "type": "text",
+              "uuid": "5dd73ab0-9f96-4bd9-891e-d08fda128a91"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5062/api/FilesUpload/UploadFile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5062",
+          "path": [
+            "api",
+            "FilesUpload",
+            "UploadFile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetFiles",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "File",
+              "type": "file",
+              "uuid": "adbff0b1-3ec8-425e-874e-5c3d2d892a0d",
+              "src": [
+                "/C:/Users/dell/Downloads/image (2).png",
+                "/C:/Users/dell/Downloads/image (2).png"
+              ]
+            },
+            {
+              "key": "Imagecaption",
+              "value": "itsImage",
+              "type": "text",
+              "uuid": "5dd73ab0-9f96-4bd9-891e-d08fda128a91"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5062/api/FilesUpload/GetAllFileUploadList",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5062",
+          "path": [
+            "api",
+            "FilesUpload",
+            "GetAllFileUploadList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetUploadFilesById",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5062/api/FilesUpload/DownloadFile?Id=2002",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5062",
+          "path": [
+            "api",
+            "FilesUpload",
+            "DownloadFile"
+          ],
+          "query": [
+            {
+              "key": "Id",
+              "value": "2002"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
