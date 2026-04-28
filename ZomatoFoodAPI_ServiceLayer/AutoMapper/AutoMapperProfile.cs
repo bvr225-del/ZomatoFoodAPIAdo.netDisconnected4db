@@ -27,14 +27,14 @@ namespace ZomatoFoodAPI_ServiceLayer.AutoMapper
             //===========================================
             CreateMap<FileUploadDTO, FileUpload>();//this is used to map the data of fileUploadDTO class object to fileUpload class object
             CreateMap<FileUpload, FileUploadDTO>();//this is used to map the data of fileUpload class object to fileUploadDTO class object
-            CreateMap<EmployeeDto, Employee>();//this is used to map the data of fileUploadDTO class object to fileUpload class object
-            CreateMap<Employee, EmployeeDto>();//this is used to map the data of fileUpload class object to fileUploadDTO class object
-            CreateMap<DepartmentDto, Department>();//this is used to map the data of fileUploadDTO class object to fileUpload class object
-            CreateMap<Department, DepartmentDto>();//this is used to map the data of fileUpload class object to fileUploadDTO class object
-            CreateMap<OrdersDto, Orders>();//this is used to map the data of fileUploadDTO class object to fileUpload class object
-            CreateMap<Orders, OrdersDto>();//this is used to map the data of fileUpload class object to fileUploadDTO class object
-            CreateMap<RestaurantDto, Restaurant>();//this is used to map the data of fileUploadDTO class object to fileUpload class object
-            CreateMap<Restaurant, RestaurantDto>();//this is used to map the data of fileUpload class object to fileUploadDTO class object
+            CreateMap<EmployeeDto, Employee>();//this is used to map the data of EmployeeDto class object to Employee class object
+            CreateMap<Employee, EmployeeDto>();//this is used to map the data of Employee class object to EmployeeDto class object
+            CreateMap<DepartmentDto, Department>();//this is used to map the data of DepartmentDto class object to Department class object
+            CreateMap<Department, DepartmentDto>();//this is used to map the data of Department class object to DepartmentDto class object
+            CreateMap<OrdersDto, Orders>();//this is used to map the data of OrdersDto class object to Orders class object
+            CreateMap<Orders, OrdersDto>();//this is used to map the data of Orders class object to OrdersDto class object
+            CreateMap<RestaurantDto, Restaurant>();//this is used to map the data of RestaurantDto class object to Restaurant class object
+            CreateMap<Restaurant, RestaurantDto>();//this is used to map the data of Restaurant class object to RestaurantDto class object
 
         }
 
