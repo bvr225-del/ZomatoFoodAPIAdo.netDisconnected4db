@@ -37,13 +37,32 @@ namespace ZomatoFoodAPI_ServiceLayer
 
         public async Task<List<RestaurantDto>> GetallRestaurants()
         {
-            var res = await _restaurantRepository.GetallRestaurants();
-            return _mapper.Map<List<RestaurantDto>>(res);
+            List<RestaurantDto> reslist = new List<RestaurantDto>();
+            var getrestaurants = await _restaurantRepository.GetallRestaurants();
+            foreach (var restaurant in getrestaurants)
+            {
+                RestaurantDto resobj = new RestaurantDto();
+                resobj.Id = restaurant.Id;
+                resobj.RestaurantName = restaurant.RestaurantName;
+                resobj.RestaurantLocation = restaurant.RestaurantLocation;
+                resobj.CreationDate = restaurant.CreationDate;
+                reslist.Add(resobj);
+
+
+            }
+            return reslist;
+
         }
 
         public async Task<RestaurantDto> GetRestaurantById(int Id)
         {
             var res = await _restaurantRepository.GetRestaurantById(Id);
+            RestaurantDto objres = new RestaurantDto();
+            objres.Id = res.Id;
+            objres.RestaurantName = res.RestaurantName;
+            objres.RestaurantLocation = res.RestaurantLocation;
+            objres.CreationDate = res.CreationDate;
+            return objres;
             return _mapper.Map<RestaurantDto>(res);
 
         }
@@ -56,5 +75,6 @@ namespace ZomatoFoodAPI_ServiceLayer
             return true;
 
         }
+
     }
 }
