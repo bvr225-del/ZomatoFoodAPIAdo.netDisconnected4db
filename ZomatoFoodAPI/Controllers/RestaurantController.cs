@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ZomatoFoodAPI_BusinessEntities.Dtos;
 using ZomatoFoodAPI_BusinessEntities.Interfaces;
 using ZomatoFoodAPI_BusinessEntities.Models;
 
@@ -16,7 +17,7 @@ namespace ZomatoFoodAPI.Controllers
         }
         [HttpPost]
         [Route("AddRestaurant")]
-        public async Task<IActionResult> Post([FromBody] Restaurant Objres)
+        public async Task<IActionResult> Post([FromBody] RestaurantDto Objres)
         {//dtos are used to transafer the data purpose used.
             try
             {
@@ -102,7 +103,7 @@ namespace ZomatoFoodAPI.Controllers
         }
         [HttpPut]
         [Route("UpdateRestaurant")]
-        public async Task<IActionResult> put([FromBody] Restaurant Objres)
+        public async Task<IActionResult> put([FromBody] RestaurantDto Objres)
         {
             try
             {
