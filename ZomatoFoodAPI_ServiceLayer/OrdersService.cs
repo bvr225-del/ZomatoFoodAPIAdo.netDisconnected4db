@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,21 +13,22 @@ namespace ZomatoFoodAPI_ServiceLayer
 {
     public class OrdersService : IOrdersService
     {
-        private readonly IOrdersRepository _ordersRepository;
+        public readonly IOrdersRepository _ordersRepository;
+        private readonly IMapper _mapper;
         //To implement dependency injection in the service class,
         //we need to inject the repository interface in the constructor of the service class
         //and assign it to the private readonly field of the repository interface type.
         //This way we can use the repository methods in the service class to perform the CRUD operations on the database.
-        public OrdersService(IOrdersRepository ordersRepository)
+        public OrdersService(IOrdersRepository ordersRepository,IMapper mapper)
         {
             _ordersRepository = ordersRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddOrder(OrdersDto Objord)
         {
             Orders objorder = new Orders();
-            objorder.OrderLocation = Objord.OrderLocation;
-            objorder.OrderName = Objord.OrderName;
+            _mapper.Map(Objord, objorder);
             var res = await _ordersRepository.AddOrder(objorder);
             return res;
         }
@@ -39,38 +41,21 @@ namespace ZomatoFoodAPI_ServiceLayer
 
         public async Task<List<OrdersDto>> GetallOrders()
         {
-            List<OrdersDto> ordlist = new List<OrdersDto>();
             var getorder = await _ordersRepository.GetallOrders();
-            foreach (var order in getorder)
-            {
-                OrdersDto ordobj = new OrdersDto();
-                ordobj.OrderId = order.OrderId;
-                ordobj.OrderName = order.OrderName;
-                ordobj.OrderLocation = order.OrderLocation;
-                ordlist.Add(ordobj);
-
-
-            }
-            return ordlist;
+            return _mapper.Map<List<OrdersDto>>(getorder);
         }
 
         public async Task<OrdersDto> GetOrderById(int Id)
         {
             var res = await _ordersRepository.GetOrderById(Id);
-            OrdersDto objorder = new OrdersDto();
-            objorder.OrderId = res.OrderId;
-            objorder.OrderName = res.OrderName;
-            objorder.OrderLocation = res.OrderLocation;
-            return objorder;
+            return _mapper.Map<OrdersDto>(res);
         }
 
         public async Task<bool> UpdateOrder(OrdersDto Objord)
         {
 
             Orders order = new Orders();
-            order.OrderId = Objord.OrderId;
-            order.OrderName = Objord.OrderName;
-            order.OrderLocation = Objord.OrderLocation;
+            _mapper.Map(Objord, order);
             await _ordersRepository.UpdateOrder(order);
             return true;
         }

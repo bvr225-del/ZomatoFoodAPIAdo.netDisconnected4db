@@ -77,7 +77,7 @@ namespace ZomatoFoodAPI.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, "Department Deleted Successfully");
+                    return StatusCode(StatusCodes.Status200OK, "Department Deleted Successfully");
                 }
 
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +12,22 @@ namespace ZomatoFoodAPI_ServiceLayer
 {
     public class RestaurantService : IRestaurantService
     {
-        private readonly IRestaurantRepository _restaurantRepository;
-        public RestaurantService(IRestaurantRepository restaurantRepository)
+        public readonly IRestaurantRepository _restaurantRepository;
+        private readonly IMapper _mapper;
+        public RestaurantService(IRestaurantRepository restaurantRepository, IMapper mapper)
         {
             _restaurantRepository = restaurantRepository;
+            this._mapper = mapper;
         }
+
         public async Task<bool> AddRestaurant(RestaurantDto Objres)
         {
-            Restaurant objres = new Restaurant();
-            objres.RestaurantName = Objres.RestaurantName;
-            objres.RestaurantLocation = Objres.RestaurantLocation;
-            var res = await _restaurantRepository.AddRestaurant(objres);
+            Restaurant res = new Restaurant();
+            _mapper.Map(Objres, res);
+            var result = await _restaurantRepository.AddRestaurant(res);
             return true;
 
         }
-
 
         public async Task<bool> DeleteRestaurant(int Id)
         {
@@ -61,16 +63,15 @@ namespace ZomatoFoodAPI_ServiceLayer
             objres.RestaurantLocation = res.RestaurantLocation;
             objres.CreationDate = res.CreationDate;
             return objres;
+            return _mapper.Map<RestaurantDto>(res);
 
         }
 
         public async Task<bool> UpdateRestaurant(RestaurantDto Objres)
         {
             Restaurant res = new Restaurant();
-            res.Id = Objres.Id;
-            res.RestaurantLocation = Objres.RestaurantLocation;
-            res.RestaurantName = Objres.RestaurantName;
-            await _restaurantRepository.UpdateRestaurant(res);
+            _mapper.Map(Objres, res);
+            var result = await _restaurantRepository.UpdateRestaurant(res);
             return true;
 
         }

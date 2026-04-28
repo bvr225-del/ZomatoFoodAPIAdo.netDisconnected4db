@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +12,20 @@ namespace ZomatoFoodAPI_ServiceLayer
 {
     public class DepartmentService : IDepartmentService
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        public readonly IDepartmentRepository _departmentRepository;
+        private readonly IMapper _mapper;
         //Don't create dirrect object of repository class here
         //create the onstructor of this service class and inject the repository interface into the constructor and assign it to the private readonly field of the repository interface type.
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        public DepartmentService(IDepartmentRepository departmentRepository,IMapper mapper)
         {
             _departmentRepository = departmentRepository;
+            this._mapper = mapper;
         }
         //we called this process as dependency injection and this is the best practice to achieve loose coupling between the service and repository layers of the application.
         public async Task<bool> AddDepartment(DepartmentDto Dept)
         {
             Department department = new Department();
-            department.DepartmentName = Dept.DepartmentName;
-            department.DepartmentLocation = Dept.DepartmentLocation;
-            department.DepartmentId = Dept.DepartmentId;
+            _mapper.Map(Dept, department);
             var res = await _departmentRepository.AddDepartment(department);
             return res;
         }
@@ -37,35 +38,20 @@ namespace ZomatoFoodAPI_ServiceLayer
 
         public async Task<List<DepartmentDto>> GetAllDepartments()
         {
-            List<DepartmentDto> deptlist = new List<DepartmentDto>();
             var getdept = await _departmentRepository.GetAllDepartments();
-            foreach (Department dept in getdept)
-            {
-                DepartmentDto deptobj = new DepartmentDto();
-                deptobj.DepartmentId = dept.DepartmentId;
-                deptobj.DepartmentName = dept.DepartmentName;
-                deptobj.DepartmentLocation = dept.DepartmentLocation;
-                deptlist.Add(deptobj);
-            }
-            return deptlist;
+            return _mapper.Map<List<DepartmentDto>>(getdept);
         }
 
         public async Task<DepartmentDto> GetDepartmentById(int DepartmentId)
         {
             var res = await _departmentRepository.GetDepartmentById(DepartmentId);
-            DepartmentDto dept = new DepartmentDto();
-            dept.DepartmentId = res.DepartmentId;
-            dept.DepartmentName = res.DepartmentName;
-            dept.DepartmentLocation = res.DepartmentLocation;
-            return dept;
+            return _mapper.Map<DepartmentDto>(res);
         }
 
         public async Task<bool> UpdateDepartment(DepartmentDto Dept)
         {
             Department department = new Department();
-            department.DepartmentName = Dept.DepartmentName;
-            department.DepartmentLocation = Dept.DepartmentLocation;
-            department.DepartmentId = Dept.DepartmentId;
+            _mapper.Map(Dept, department);
             await _departmentRepository.UpdateDepartment(department);
             return true;
         }
